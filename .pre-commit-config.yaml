@@ -14,12 +14,12 @@ repos:
     rev: v1.1.10
     hooks:
       - id: forbid-tabs
-  - repo: git://github.com/Lucas-C/pre-commit-hooks-nodejs
-    rev: v1.1.1
-    hooks:
-      - id: dockerfile_lint
   - repo: https://github.com/sirosen/check-jsonschema
     rev: 0.10.0
     hooks:
       - id: check-github-actions
       - id: check-github-workflows
+  # - repo: git://github.com/Lucas-C/pre-commit-hooks-nodejs
+  #   rev: v1.1.1
+  #   hooks:
+  #     - id: dockerfile_lint
