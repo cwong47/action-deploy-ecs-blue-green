@@ -9,7 +9,7 @@ inputs:
   dry_run:
     description: Dry run
     required: true
-    default: false
+    default: 'false'
   hosted_zone_id:
     description: Hosted zone ID from Route53
     required: true
