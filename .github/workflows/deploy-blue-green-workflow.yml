@@ -1,0 +1,38 @@
+on: [push]
+
+jobs:
+  deploy-blue-green-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run get-blue-green-info
+        id: get-blue-green-info
+        uses: ./
+        with:
+          action: get-blue-green-info
+          hosted_zone_id: ZHOSTEDZONEID1
+          zone_name: cwong.qa.my-company.com.
+          ecs_service_blue: of-rest-service-blue
+          ecs_service_green: of-rest-service-green
+          ecs_cluster: qa-default-01
+          dry_run: true
+
+      - name: Run update-primary-autoscale-capacity
+        uses: ./
+        with:
+          action: update-autoscale-capacity
+          ecs_cluster: qa-default-01
+          ecs_service: ${{ steps.get-blue-green-info.outputs.original_secondary_service }}
+          min_capacity: ${{ steps.get-blue-green-info.outputs.original_primary_min_capacity }}
+          max_capacity: ${{ steps.get-blue-green-info.outputs.original_primary_max_capacity }}
+          dry_run: true
+
+      - name: Run update-primary-dns-weight
+        uses: ./
+        with:
+          action: update-dns-weight
+          hosted_zone_id: ZHOSTEDZONEID1
+          primary_route53_json: ${{ steps.get-blue-green-info.outputs.pending_primary_json }}
+          secondary_route53_json: ${{ steps.get-blue-green-info.outputs.pending_secondary_json }}
+          dry_run: true

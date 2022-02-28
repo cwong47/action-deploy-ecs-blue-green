@@ -1,0 +1,94 @@
+name: deploy-ecs-blue-green
+description: Get Route53 and ECS service info from AWS and deploys blue-green accordingly.
+author: cwong47
+
+inputs:
+  action:
+    description: What step to execute
+    required: true
+  dry_run:
+    description: Dry run
+    required: true
+    default: false
+  hosted_zone_id:
+    description: Hosted zone ID from Route53
+    required: true
+  zone_name:
+    description: Zone name from Route53
+    required: true
+    default: ""
+  ecs_service_blue:
+    description: The "blue" cluster of your ECS service
+    required: true
+    default: ""
+  ecs_service_green:
+    description: The "green" cluster of your ECS service
+    required: true
+    default: ""
+  set_identifier_pattern:
+    description: Default is "blue|green"
+    required: true
+    default: ""
+  primary_route53_json:
+    description: Primary Route53 record in JSON format in base64 encoding
+    required: true
+    default: ""
+  secondary_route53_json:
+    description: Primary Route53 record in JSON format in base64 encoding
+    required: true
+    default: ""
+  ecs_cluster:
+    description: The ECS cluster
+    required: true
+    default: ""
+  ecs_service:
+    description: The cluster of your ECS service
+    required: true
+    default: ""
+  min_capacity:
+    description: Minimum capacity to autoscale the service
+    required: true
+    default: ""
+  max_capacity:
+    description: Maximum capacity to autoscale the service
+    required: true
+    default: ""
+
+outputs:
+  original_primary_zone_id:
+    description: Original primary zone ID
+  original_secondary_zone_id:
+    description: Original secondary zone ID
+  original_primary_service:
+    description: Original primary service
+  original_secondary_service:
+    description: Original secondary service
+  original_primary_min_capacity:
+    description: Original primary minimum capacity for autoscale
+  original_secondary_min_capacity:
+    description: Original secondary minimum capacity for autoscale
+  original_primary_max_capacity:
+    description: Original secondary maximum capacity for autoscale
+  original_secondary_max_capacity:
+    description: Original secondary maximum capacity for autoscale
+  pending_primary_json:
+    description: Pending primary JSON in base64 encoding
+  pending_secondary_json:
+    description: Pending secondary JSON in base64 encoding
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.action }}
+    - ${{ inputs.dry_run }}
+    - ${{ inputs.hosted_zone_id }}
+    - ${{ inputs.zone_name }}
+    - ${{ inputs.ecs_service_blue }}
+    - ${{ inputs.ecs_service_green }}
+    - ${{ inputs.set_identifier_pattern }}
+    - ${{ inputs.primary_route53_json }}
+    - ${{ inputs.secondary_route53_json }}
+    - ${{ inputs.ecs_cluster }}
+    - ${{ inputs.min_capacity }}
+    - ${{ inputs.max_capacity }}
