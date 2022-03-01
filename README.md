@@ -137,34 +137,34 @@ env:
 
 | Name                       | Description                                                  | Default       | Required | Used by                                          |
 | :------------------------- | :----------------------------------------------------------- | :------------ | :------- | :----------------------------------------------- |
-| `action`                   | What step to execute                                         | `null`        | true     | `all`                                            |
-| `dry_run`                  | Dry run                                                      | `false`       | false    | `all`                                            |
-| `hosted_zone_id`           | Hosted zone ID from Route53                                  | `null`        | false    | `get-blue-green-info\|update-dns-weight`         |
-| `zone_name`                | Zone name from Route53                                       | `null`        | false    | `get-blue-green-info`                            |
-| `ecs_service_blue`         | The "blue" cluster of your ECS service                       | `null`        | false    | `get-blue-green-info`                            |
-| `ecs_service_green`        | The "green" cluster of your ECS service                      | `null`        | false    | `get-blue-green-info`                            |
-| `set_identifier_pattern`   | Default is `"blue\|green"`                                   | `blue\|green` | false    | `get-blue-green-info`                            |
-| `primary_route53_json`     | Primary Route53 record in JSON format in `base64` encoding   | `null`        | false    | `update-dns-weight`                              |
-| `secondary_route53_json`   | Secondary Route53 record in JSON format in `base64` encoding | `null`        | false    | `update-dns-weight`                              |
-| `ecs_cluster`              | The ECS cluster                                              | `null`        | false    | `get-blue-green-info\|update-autoscale-capacity` |
-| `ecs_service`              | The cluster of your ECS service                              | `null`        | false    | `update-autoscale-capacity`                      |
-| `min_capacity`             | Minimum capacity to autoscale the service                    | `null`        | false    | `update-autoscale-capacity`                      |
-| `max_capacity`             | Maximum capacity to autoscale the service                    | `null`        | false    | `update-autoscale-capacity`                      |
+| action                     | What step to execute                                         | `null`        | true     | `all`                                            |
+| dry_run                    | Dry run                                                      | `false`       | false    | `all`                                            |
+| hosted_zone_id             | Hosted zone ID from Route53                                  | `null`        | false    | `get-blue-green-info\|update-dns-weight`         |
+| zone_name                  | Zone name from Route53                                       | `null`        | false    | `get-blue-green-info`                            |
+| ecs_service_blue           | The "blue" cluster of your ECS service                       | `null`        | false    | `get-blue-green-info`                            |
+| ecs_service_green          | The "green" cluster of your ECS service                      | `null`        | false    | `get-blue-green-info`                            |
+| set_identifier_pattern     | Default is `"blue\|green"`                                   | `blue\|green` | false    | `get-blue-green-info`                            |
+| primary_route53_json       | Primary Route53 record in JSON format in `base64` encoding   | `null`        | false    | `update-dns-weight`                              |
+| secondary_route53_json     | Secondary Route53 record in JSON format in `base64` encoding | `null`        | false    | `update-dns-weight`                              |
+| ecs_cluster                | The ECS cluster                                              | `null`        | false    | `get-blue-green-info\|update-autoscale-capacity` |
+| ecs_service                | The cluster of your ECS service                              | `null`        | false    | `update-autoscale-capacity`                      |
+| min_capacity               | Minimum capacity to autoscale the service                    | `null`        | false    | `update-autoscale-capacity`                      |
+| max_capacity               | Maximum capacity to autoscale the service                    | `null`        | false    | `update-autoscale-capacity`                      |
 
 ### Outputs
 
 | Name                              | Description                                       |
 | :-------------------------------- | :------------------------------------------------ |
-| `original_primary_zone_id`        | Original primary zone ID                          |
-| `original_secondary_zone_id`      | Original secondary zone ID                        |
-| `original_primary_service`        | Original primary service                          |
-| `original_secondary_service`      | Original secondary service                        |
-| `original_primary_min_capacity`   | Original primary minimum capacity for autoscale   |
-| `original_secondary_min_capacity` | Original secondary minimum capacity for autoscale |
-| `original_primary_max_capacity`   | Original primary maximum capacity for autoscale   |
-| `original_secondary_max_capacity` | Original secondary maximum capacity for autoscale |
-| `pending_primary_json`            | Pending primary JSON in base64 encoding           |
-| `pending_secondary_json`          | Pending secondary JSON in base64 encoding         |
+| original_primary_zone_id          | Original primary zone ID                          |
+| original_secondary_zone_id        | Original secondary zone ID                        |
+| original_primary_service          | Original primary service                          |
+| original_secondary_service        | Original secondary service                        |
+| original_primary_min_capacity     | Original primary minimum capacity for autoscale   |
+| original_secondary_min_capacity   | Original secondary minimum capacity for autoscale |
+| original_primary_max_capacity     | Original primary maximum capacity for autoscale   |
+| original_secondary_max_capacity   | Original secondary maximum capacity for autoscale |
+| pending_primary_json              | Pending primary JSON in base64 encoding           |
+| pending_secondary_json            | Pending secondary JSON in base64 encoding         |
 
 ## License
 
