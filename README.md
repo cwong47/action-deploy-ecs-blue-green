@@ -16,16 +16,43 @@ This action deploys weighted DNS blue-green ECS cluster. It collects Route53 and
 
 ## Table of Contents
 
+- [Requirements](#requirements)
 - [Usage](#usage)
-  - [Workflow](#workflow)
 - [Parameters](#parameters)
     - [Inputs](#inputs)
     - [Outputs](#outputs)
 - [License](#license)
 
-## Usage
+## Requirements
 
-### Workflow
+Your Github repository will need to access AWS, I recommend going with OpenID Connect instead of AWS credentials.
+You can find more details from [Terraform and Github Actions without AWS Credentials](https://cwong47.gitlab.io/technology-terraform-aws-github-actions-no-secrets/).
+
+In your workflow yaml file, you will need the following blocks.
+
+```yaml
+env:
+  AWS_ACCOUNT_ID_QA: 123456789012
+  AWS_DEFAULT_REGION: us-west-2
+  AWS_DEFAULT_OUTPUT: json
+
+permissions:
+  id-token: write
+  contents: write
+  actions: read
+```
+
+Under the `steps` section, configure AWS credentials via assume-role.
+
+```yaml
+      - name: Configure AWS credentials [QA]
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID_QA }}:role/qa-github-actions
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+```
+
+## Usage
 
 These environment variables need to be set in the action yml file in order to work properly.
 
@@ -84,7 +111,6 @@ env:
         uses: "cwong47/action-deploy-ecs-blue-green@latest"
         id: update-primary-dns-weight
         with:
-          action: update-dns-weight
           action: update-dns-weight
           hosted_zone_id: ${{ env.HOSTED_ZONE_ID }}
           primary_route53_json: ${{ steps.get-blue-green-info.outputs.pending_primary_json }}
