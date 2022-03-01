@@ -8,50 +8,50 @@ inputs:
     required: true
   dry_run:
     description: Dry run
-    required: true
+    required: false
     default: 'false'
   hosted_zone_id:
-    description: Hosted zone ID from Route53
-    required: true
+    description: Route53 hosted zone ID
+    required: false
   zone_name:
-    description: Zone name from Route53
-    required: true
+    description: Route53 zone name
+    required: false
     default: ""
   ecs_service_blue:
-    description: The "blue" cluster of your ECS service
-    required: true
+    description: First of the blue-green ECS service
+    required: false
     default: ""
   ecs_service_green:
-    description: The "green" cluster of your ECS service
-    required: true
+    description: Second of the blue-green ECS service
+    required: false
     default: ""
   set_identifier_pattern:
-    description: Default is "blue|green"
-    required: true
+    description: Pattern of the blue-green ECS services
+    required: false
     default: ""
   primary_route53_json:
     description: Primary Route53 record in JSON format in base64 encoding
-    required: true
+    required: false
     default: ""
   secondary_route53_json:
     description: Primary Route53 record in JSON format in base64 encoding
-    required: true
+    required: false
     default: ""
   ecs_cluster:
     description: The ECS cluster
-    required: true
+    required: false
     default: ""
   ecs_service:
-    description: The cluster of your ECS service
-    required: true
+    description: The ECS service to autoscale
+    required: false
     default: ""
   min_capacity:
     description: Minimum capacity to autoscale the service
-    required: true
+    required: false
     default: ""
   max_capacity:
     description: Maximum capacity to autoscale the service
-    required: true
+    required: false
     default: ""
 
 outputs:
@@ -68,7 +68,7 @@ outputs:
   original_secondary_min_capacity:
     description: Original secondary minimum capacity for autoscale
   original_primary_max_capacity:
-    description: Original secondary maximum capacity for autoscale
+    description: Original primary maximum capacity for autoscale
   original_secondary_max_capacity:
     description: Original secondary maximum capacity for autoscale
   pending_primary_json:
