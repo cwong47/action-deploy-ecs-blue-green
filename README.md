@@ -57,7 +57,7 @@ Under the `steps` section, configure AWS credentials via assume-role.
 These environment variables need to be set in the action yml file in order to work properly.
 
 | Variable           | Description                                        |
-| ------------------ | -------------------------------------------------- |
+| :----------------- | :------------------------------------------------- |
 | HOSTED_ZONE_ID     | DNS zone ID (Z123456789ABC1)                       |
 | ZONE_NAME          | DNS domain name (rest-service.qa.my-company.com.)  |
 | ECS_CLUSTER        | ECS cluster name                                   |
@@ -136,7 +136,7 @@ env:
 ### Inputs
 
 | Name                       | Description                                                  | Default       | Required | Used by                                          |
-| -------------------------- | ------------------------------------------------------------ | ------------- | -------- | ------------------------------------------------ |
+| :------------------------- | :----------------------------------------------------------- | :------------ | :------- | :----------------------------------------------- |
 | `action`                   | What step to execute                                         | `null`        | true     | `all`                                            |
 | `dry_run`                  | Dry run                                                      | `false`       | false    | `all`                                            |
 | `hosted_zone_id`           | Hosted zone ID from Route53                                  | `null`        | false    | `get-blue-green-info\|update-dns-weight`         |
@@ -154,7 +154,7 @@ env:
 ### Outputs
 
 | Name                              | Description                                       |
-| --------------------------------- | ------------------------------------------------- |
+| :-------------------------------- | :------------------------------------------------ |
 | `original_primary_zone_id`        | Original primary zone ID                          |
 | `original_secondary_zone_id`      | Original secondary zone ID                        |
 | `original_primary_service`        | Original primary service                          |
